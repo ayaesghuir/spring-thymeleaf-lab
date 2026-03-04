@@ -1,64 +1,50 @@
 package com.example.spring_thymeleaf_lab.models;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 public class Student {
+
+    private Long id;
 
     @NotBlank(message = "Name is required")
     @Size(min = 2, max = 50, message = "Name must be between 2 and 50 characters")
     private String name;
 
+    @NotNull(message = "Age is required")
+    @Min(value = 16, message = "Age must be at least 16")
+    private Integer age;
+
     @NotBlank(message = "Email is required")
     @Email(message = "Please provide a valid email address")
     private String email;
 
-    @NotBlank(message = "Major is required")
-    private String major;
+    @NotBlank(message = "Course is required")
+    private String course;
 
-    // Default constructor
-    public Student() {
-    }
+    @Pattern(regexp = "^[A-Z0-9]{8}$", message = "Student ID must be 8 characters with uppercase letters and numbers only")
+    private String studentId;
 
-    // Constructor with fields
-    public Student(String name, String email, String major) {
+    public Student() {}
+
+    public Student(Long id, String name, Integer age, String email, String course, String studentId) {
+        this.id = id;
         this.name = name;
+        this.age = age;
         this.email = email;
-        this.major = major;
+        this.course = course;
+        this.studentId = studentId;
     }
 
-    // Getters and Setters
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getMajor() {
-        return major;
-    }
-
-    public void setMajor(String major) {
-        this.major = major;
-    }
-
-    @Override
-    public String toString() {
-        return "Student{" +
-                "name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", major='" + major + '\'' +
-                '}';
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+    public Integer getAge() { return age; }
+    public void setAge(Integer age) { this.age = age; }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+    public String getCourse() { return course; }
+    public void setCourse(String course) { this.course = course; }
+    public String getStudentId() { return studentId; }
+    public void setStudentId(String studentId) { this.studentId = studentId; }
 }
